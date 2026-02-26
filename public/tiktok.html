@@ -197,56 +197,15 @@
     .footer-links a:hover { color: #ee1d52; }
     .footer-disclaimer { font-size: 0.8rem; color: #888; margin-top: 0.5rem; }
 
-    .site-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 1rem 0 1.25rem 0;
-    }
-    .site-buttons a {
-      display: inline-block;
-      padding: 0.5rem 0.85rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #333;
-      background: #f0f0f0;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .site-buttons a:hover {
-      background: #ee1d52;
-      color: #fff;
-      border-color: #ee1d52;
-    }
-    .site-buttons a.current {
-      background: #ee1d52;
-      color: #fff;
-      border-color: #ee1d52;
-    }
   </style>
 </head>
 <body>
   <header class="header">
     <div class="logo">sss<span>Tik</span></div>
-    <nav class="header-nav">
-      <a href="/youtube-mp3/">Download TikTok MP3</a>
-      <a href="/all-in-one/">All-in-One</a>
-    </nav>
   </header>
 
   <main class="main-card">
     <h1>TikTok Video Downloader</h1>
-    <div class="site-buttons" aria-label="Choose downloader">
-      <a href="/tiktok/" class="current">TikTok</a>
-      <a href="/facebook/">Facebook</a>
-      <a href="/instagram/">Instagram</a>
-      <a href="/youtube/">YouTube</a>
-      <a href="/youtube-mp3/">YouTube to MP3</a>
-      <a href="/all-in-one/">All-in-One</a>
-    </div>
     <form id="download-form">
       <div class="input-row">
         <input type="url" id="url" name="url" placeholder="Paste TikTok link here..." required autocomplete="off">
@@ -285,14 +244,6 @@
   </section>
 
   <footer class="footer">
-    <div class="footer-links">
-      <a href="/tiktok/">TikTok</a>
-      <a href="/facebook/">Facebook</a>
-      <a href="/instagram/">Instagram</a>
-      <a href="/youtube/">YouTube</a>
-      <a href="/youtube-mp3/">YouTube to MP3</a>
-      <a href="/all-in-one/">All-in-One</a>
-    </div>
     <p class="footer-disclaimer">We are not affiliated with TikTok, Douyin or Bytedance.</p>
     <p>Copyright 2018–2026</p>
   </footer>

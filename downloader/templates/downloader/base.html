@@ -224,14 +224,16 @@
     <h1><span class="site-title">{{ site_name }}</span> Downloader</h1>
     <p class="tagline">Paste a {{ site_name }} URL below to download.</p>
 
+    {% if theme_slug == 'all-in-one' %}
     <div class="site-buttons" aria-label="Choose downloader">
-      <a href="{% url 'downloader:tiktok' %}" {% if theme_slug == 'tiktok' %}class="current"{% endif %}>TikTok</a>
-      <a href="{% url 'downloader:facebook' %}" {% if theme_slug == 'facebook' %}class="current"{% endif %}>Facebook</a>
-      <a href="{% url 'downloader:instagram' %}" {% if theme_slug == 'instagram' %}class="current"{% endif %}>Instagram</a>
-      <a href="{% url 'downloader:youtube' %}" {% if theme_slug == 'youtube' %}class="current"{% endif %}>YouTube</a>
-      <a href="{% url 'downloader:youtube_mp3' %}" {% if theme_slug == 'youtube-mp3' %}class="current"{% endif %}>YouTube to MP3</a>
-      <a href="{% url 'downloader:all_in_one' %}" {% if theme_slug == 'all-in-one' %}class="current"{% endif %}>All-in-One</a>
+      <a href="{% url 'downloader:tiktok' %}">TikTok</a>
+      <a href="{% url 'downloader:facebook' %}">Facebook</a>
+      <a href="{% url 'downloader:instagram' %}">Instagram</a>
+      <a href="{% url 'downloader:youtube' %}">YouTube</a>
+      <a href="{% url 'downloader:youtube_mp3' %}">YouTube to MP3</a>
+      <a href="{% url 'downloader:all_in_one' %}" class="current">All-in-One</a>
     </div>
+    {% endif %}
 
     <form id="download-form">
       <div class="form-group">
@@ -243,7 +245,7 @@
 
     <div id="result" role="status" aria-live="polite"></div>
 
-    {% block nav_links %}
+    {% if theme_slug == 'all-in-one' %}
     <nav class="nav-links">
       <a href="{% url 'downloader:tiktok' %}">TikTok</a>
       <a href="{% url 'downloader:facebook' %}">Facebook</a>
@@ -252,7 +254,7 @@
       <a href="{% url 'downloader:youtube_mp3' %}">YouTube to MP3</a>
       <a href="{% url 'downloader:all_in_one' %}">All-in-One</a>
     </nav>
-    {% endblock %}
+    {% endif %}
   </div>
 
   <script>
