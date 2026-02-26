@@ -4,8 +4,10 @@ Run: python manage.py export_vercel_pages
 Writes to public/ (api_url will be /api/download for serverless).
 """
 import json
+import traceback
 from pathlib import Path
 
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.http import HttpRequest
 from django.template import loader
@@ -17,9 +19,16 @@ class Command(BaseCommand):
     help = "Export downloader pages to public/ for Vercel static deployment."
 
     def handle(self, *args, **options):
-        base_dir = Path(__file__).resolve().parent.parent.parent.parent
+        try:
+            self._export()
+        except Exception as e:
+            self.stderr.write(traceback.format_exc())
+            raise
+
+    def _export(self):
+        base_dir = Path(settings.BASE_DIR)
         public_dir = base_dir / "public"
-        public_dir.mkdir(exist_ok=True)
+        public_dir.mkdir(parents=True, exist_ok=True)
 
         request = HttpRequest()
         request.META["SERVER_NAME"] = "localhost"

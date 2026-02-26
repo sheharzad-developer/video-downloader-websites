@@ -41,7 +41,7 @@ This writes/updates `public/*.html` with `api_url = '/api/download'`.
 - In the Vercel dashboard: **Import** the repo.
 - **Root Directory:** leave as the project root.
 - **Framework Preset:** Other (or leave default).
-- **Build Command:** `python manage.py export_vercel_pages` (so `public/` is regenerated on each deploy; optional if you commit `public/`).
+- **Build Command:** set in `vercel.json` (no-op; uses committed `public/`).
 - **Output Directory:** `public`.
 - **Install Command:** Leave empty; the project’s `vercel.json` sets `uv pip install -r requirements.txt` (Vercel’s Python is managed by `uv`; plain `pip install` can fail with “externally-managed-environment”).
 
