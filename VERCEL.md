@@ -43,7 +43,7 @@ This writes/updates `public/*.html` with `api_url = '/api/download'`.
 - **Framework Preset:** Other (or leave default).
 - **Build Command:** `python manage.py export_vercel_pages` (so `public/` is regenerated on each deploy; optional if you commit `public/`).
 - **Output Directory:** `public`.
-- **Install Command:** `pip install -r requirements.txt` (Vercel usually detects this for Python).
+- **Install Command:** Leave empty; the project’s `vercel.json` sets `uv pip install -r requirements.txt` (Vercel’s Python is managed by `uv`; plain `pip install` can fail with “externally-managed-environment”).
 
 Add environment variables in **Project → Settings → Environment Variables**:
 
