@@ -224,17 +224,6 @@
     <h1><span class="site-title">{{ site_name }}</span> Downloader</h1>
     <p class="tagline">Paste a {{ site_name }} URL below to download.</p>
 
-    {% if theme_slug == 'all-in-one' %}
-    <div class="site-buttons" aria-label="Choose downloader">
-      <a href="{% url 'downloader:tiktok' %}">TikTok</a>
-      <a href="{% url 'downloader:facebook' %}">Facebook</a>
-      <a href="{% url 'downloader:instagram' %}">Instagram</a>
-      <a href="{% url 'downloader:youtube' %}">YouTube</a>
-      <a href="{% url 'downloader:youtube_mp3' %}">YouTube to MP3</a>
-      <a href="{% url 'downloader:all_in_one' %}" class="current">All-in-One</a>
-    </div>
-    {% endif %}
-
     <form id="download-form">
       <div class="form-group">
         <label for="url">Video URL</label>
@@ -244,17 +233,6 @@
     </form>
 
     <div id="result" role="status" aria-live="polite"></div>
-
-    {% if theme_slug == 'all-in-one' %}
-    <nav class="nav-links">
-      <a href="{% url 'downloader:tiktok' %}">TikTok</a>
-      <a href="{% url 'downloader:facebook' %}">Facebook</a>
-      <a href="{% url 'downloader:instagram' %}">Instagram</a>
-      <a href="{% url 'downloader:youtube' %}">YouTube</a>
-      <a href="{% url 'downloader:youtube_mp3' %}">YouTube to MP3</a>
-      <a href="{% url 'downloader:all_in_one' %}">All-in-One</a>
-    </nav>
-    {% endif %}
   </div>
 
   <script>
