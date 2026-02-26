@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python manage.py export_vercel_pages",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/tiktok", "destination": "/tiktok.html" },
+    { "source": "/tiktok/", "destination": "/tiktok.html" },
+    { "source": "/facebook", "destination": "/facebook.html" },
+    { "source": "/facebook/", "destination": "/facebook.html" },
+    { "source": "/instagram", "destination": "/instagram.html" },
+    { "source": "/instagram/", "destination": "/instagram.html" },
+    { "source": "/youtube", "destination": "/youtube.html" },
+    { "source": "/youtube/", "destination": "/youtube.html" },
+    { "source": "/youtube-mp3", "destination": "/youtube-mp3.html" },
+    { "source": "/youtube-mp3/", "destination": "/youtube-mp3.html" },
+    { "source": "/all-in-one", "destination": "/index.html" },
+    { "source": "/all-in-one/", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/download.py": {
+      "maxDuration": 60
+    }
+  }
+}

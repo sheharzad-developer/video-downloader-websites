@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ site_name }} Downloader{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --text: #f5f5f5;
+      --muted: #a0a0a0;
+      --accent: #00f2ea;
+      --accent-hover: #00c9c2;
+      --error: #ff4757;
+      --success: #2ed573;
+      --input-bg: #262626;
+      --input-border: #333;
+      --radius: 12px;
+      --btn-radius: 10px;
+      --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+    /* Facebook: blue theme */
+    body.theme-facebook {
+      --accent: #1877f2;
+      --accent-hover: #166fe5;
+      --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --btn-radius: 8px;
+    }
+    /* Instagram: yellow/orange shades */
+    body.theme-instagram {
+      --accent: #f09433;
+      --accent-hover: #e6683c;
+      --font: 'Poppins', 'Inter', system-ui, sans-serif;
+      --btn-radius: 24px;
+    }
+    /* YouTube: red */
+    body.theme-youtube {
+      --accent: #ff0000;
+      --accent-hover: #cc0000;
+      --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --btn-radius: 4px;
+    }
+    /* YouTube to MP3: red variant */
+    body.theme-youtube-mp3 {
+      --accent: #e53935;
+      --accent-hover: #c62828;
+      --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --btn-radius: 8px;
+    }
+    /* All-in-One: SaveFrom-style purple */
+    body.theme-all-in-one {
+      --accent: #7c4dff;
+      --accent-hover: #651fff;
+      --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --btn-radius: 12px;
+    }
+    /* TikTok (when using base): cyan/dark */
+    body.theme-tiktok {
+      --accent: #00f2ea;
+      --accent-hover: #00c9c2;
+      --font: 'Inter', system-ui, sans-serif;
+      --btn-radius: 10px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .container {
+      width: 100%;
+      max-width: 520px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.75rem;
+      font-weight: 600;
+      font-family: var(--font);
+    }
+    .site-title { color: var(--accent); }
+    .tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+    }
+    input[type="url"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-family: var(--font);
+      border: 1px solid var(--input-border);
+      border-radius: var(--btn-radius);
+      background: var(--input-bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="url"]:focus {
+      border-color: var(--accent);
+    }
+    input[type="url"]::placeholder {
+      color: var(--muted);
+    }
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font);
+      color: #111;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--btn-radius);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button[type="submit"]:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+    button[type="submit"]:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    #result {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: var(--btn-radius);
+      font-size: 0.9rem;
+      display: none;
+    }
+    #result.success {
+      display: block;
+      background: rgba(46, 213, 115, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+    #result.error {
+      display: block;
+      background: rgba(255, 71, 87, 0.15);
+      border: 1px solid var(--error);
+      color: #ff6b81;
+    }
+    #result a {
+      color: var(--accent);
+      word-break: break-all;
+    }
+    .nav-links {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--input-border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="theme-{{ theme_slug }}">
+  <div class="container">
+    <h1><span class="site-title">{{ site_name }}</span> Downloader</h1>
+    <p class="tagline">Paste a {{ site_name }} URL below to download.</p>
+
+    <form id="download-form">
+      <div class="form-group">
+        <label for="url">Video URL</label>
+        <input type="url" id="url" name="url" placeholder="https://..." required autocomplete="off">
+      </div>
+      <button type="submit" id="submit-btn">Download</button>
+    </form>
+
+    <div id="result" role="status" aria-live="polite"></div>
+
+    {% block nav_links %}
+    <nav class="nav-links">
+      <a href="{% url 'downloader:tiktok' %}">TikTok</a>
+      <a href="{% url 'downloader:facebook' %}">Facebook</a>
+      <a href="{% url 'downloader:instagram' %}">Instagram</a>
+      <a href="{% url 'downloader:youtube' %}">YouTube</a>
+      <a href="{% url 'downloader:youtube_mp3' %}">YouTube to MP3</a>
+      <a href="{% url 'downloader:all_in_one' %}">All-in-One</a>
+    </nav>
+    {% endblock %}
+  </div>
+
+  <script>
+    (function() {
+      const form = document.getElementById('download-form');
+      const urlInput = document.getElementById('url');
+      const submitBtn = document.getElementById('submit-btn');
+      const resultEl = document.getElementById('result');
+
+      const apiUrl = '{{ api_url|escapejs }}';
+      const postPayload = {{ post_payload_json|safe }};
+
+      function showResult(isSuccess, html) {
+        resultEl.className = isSuccess ? 'success' : 'error';
+        resultEl.innerHTML = html;
+        resultEl.style.display = 'block';
+      }
+
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        submitBtn.textContent = loading ? 'Downloading…' : 'Download';
+      }
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const url = (urlInput.value || '').trim();
+        if (!url) {
+          showResult(false, 'Please enter a video URL.');
+          return;
+        }
+
+        setLoading(true);
+        resultEl.style.display = 'none';
+
+        const body = { url: url, ...postPayload };
+
+        fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        })
+          .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+          .then(function(_ref) {
+            var ok = _ref.ok, data = _ref.data;
+            if (ok && data.status !== 'error') {
+              var link = data.url || data.link;
+              var text = data.text || data.filename || 'Download ready';
+              if (link) {
+                showResult(true, 'Download: <a href="' + link + '" target="_blank" rel="noopener">' + (text || link) + '</a>');
+              } else {
+                showResult(true, text || JSON.stringify(data));
+              }
+            } else {
+              var err = data.error || {};
+              var msg = err.text || err.context || err.code || (typeof data.error === 'string' ? data.error : 'Download failed.');
+              showResult(false, msg);
+            }
+          })
+          .catch(function(err) {
+            showResult(false, 'Request failed: ' + (err.message || 'Network error'));
+          })
+          .finally(function() {
+            setLoading(false);
+          });
+      });
+    })();
+  </script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
