@@ -186,6 +186,36 @@
     .nav-links a:hover {
       color: var(--accent);
     }
+    .site-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .site-buttons a {
+      display: inline-block;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: var(--btn-radius);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .site-buttons a:hover {
+      background: var(--accent);
+      color: #111;
+      border-color: var(--accent);
+    }
+    .site-buttons a.current {
+      background: var(--accent);
+      color: #111;
+      border-color: var(--accent);
+    }
   </style>
   
 </head>
@@ -193,6 +223,15 @@
   <div class="container">
     <h1><span class="site-title">Facebook</span> Downloader</h1>
     <p class="tagline">Paste a Facebook URL below to download.</p>
+
+    <div class="site-buttons" aria-label="Choose downloader">
+      <a href="/tiktok/" >TikTok</a>
+      <a href="/facebook/" class="current">Facebook</a>
+      <a href="/instagram/" >Instagram</a>
+      <a href="/youtube/" >YouTube</a>
+      <a href="/youtube-mp3/" >YouTube to MP3</a>
+      <a href="/all-in-one/" >All-in-One</a>
+    </div>
 
     <form id="download-form">
       <div class="form-group">
